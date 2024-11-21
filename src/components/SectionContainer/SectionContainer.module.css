@@ -12,11 +12,11 @@
   line-height: 0;
 }
 
-.section-container {
+.sectionContainer {
   padding: 0px 16px;
 }
 
-.section-heading {
+.sectionHeading {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -25,12 +25,12 @@
   cursor: pointer;
 }
 
-.section-heading-divider {
+.sectionHeadingDivider {
   height: 1px;
   background-color: rgb(55 65 81);
 }
 
-.section-content {
+.sectionContent {
   padding-top: 8px;
   padding-bottom: 28px;
   display: flex;
@@ -38,16 +38,9 @@
   gap: 12px;
 }
 
-.collapse-wrapper {
+.collapseWrapper {
   max-height: 0;
   overflow: hidden;
   /* transition: max-height 0.2s ease-out; */
   box-sizing: border-box;
-}
-
-.dropdown-icon {
-  position: absolute;
-  right: 16px;
-  transform: translateY(-50%);
-  /* transition: transform 0.2s ease-out; */
 }

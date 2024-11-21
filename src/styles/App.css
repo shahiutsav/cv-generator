@@ -2,9 +2,13 @@
   max-width: 1280px;
   margin: 0 auto;
   padding: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .input-section {
+  width: 100%;
   max-width: 428px;
   display: flex;
   flex-direction: column;
@@ -19,4 +23,16 @@
 .input-section h2 {
   font-size: 16px;
   margin-bottom: 8px;
+}
+
+.cv-display {
+  aspect-ratio: 2 / 3;
+  width: 100%;
+  max-width: 828px;
+  max-height: 1242px;
+  background-color: rgb(17 24 39);
+  box-sizing: border-box;
+  padding: 16px;
+  filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04))
+    drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
 }
