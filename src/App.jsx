@@ -1,18 +1,14 @@
 import "./styles/App.css";
 import TextInput from "./components/TextInput/TextInput";
 import SectionContainer from "./components/SectionContainer/SectionContainer";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import SectionCard from "./components/SectionCard/SectionCard";
 import Divider from "./components/Divider/Divider";
+import FormCarousel from "./components/FormCarousel/FormCarousel";
 
 function App() {
   const [openIndex, setOpenIndex] = useState(0);
   const [hasTransition, setHasTransition] = useState(false);
-
-  const wrapper = useRef(null);
-  const formRef = useRef(null);
-  const listRef = useRef(null);
-  const [isFormOpen, setIsFormOpen] = useState(false);
 
   const dummyData = {
     profile: {
@@ -61,24 +57,8 @@ function App() {
     return () => clearTimeout(timer);
   });
 
-  useEffect(() => {
-    if (isFormOpen) {
-      formRef.current?.scrollIntoView({ behavior: "smooth" });
-      // Change height accordingly
-      wrapper.current.style.maxHeight = formRef.current.scrollHeight + "px";
-    } else {
-      listRef.current?.scrollIntoView({ behavior: "smooth" });
-      // Change height accordingly
-      wrapper.current.style.maxHeight = listRef.current.scrollHeight + "px";
-    }
-  }, [isFormOpen]);
-
   const handleToggle = (index) => {
     setOpenIndex(openIndex === index ? null : index);
-  };
-
-  const handleOpenForm = () => {
-    setIsFormOpen(true);
   };
 
   return (
@@ -158,14 +138,8 @@ function App() {
           onToggle={() => handleToggle(1)}
           hasTransition={hasTransition}
         >
-          <div
-            style={{
-              display: "flex",
-              width: "200%",
-            }}
-            ref={wrapper}
-          >
-            <div className="crud-list" ref={listRef}>
+          <FormCarousel
+            listSection={
               <div>
                 {cvData.education.map((edu, index) => (
                   <div key={index}>
@@ -174,21 +148,18 @@ function App() {
                   </div>
                 ))}
               </div>
-              <button onClick={handleOpenForm}>Add education</button>
-            </div>
-            <div className="crud-form" ref={formRef}>
-              <TextInput labelName="School" />
-              <TextInput labelName="Degree" />
-              <TextInput labelName="Field of study" />
-              <TextInput labelName="From" />
-              <TextInput labelName="To" />
-
-              <div className="actions">
-                <button onClick={() => setIsFormOpen(false)}>Cancel</button>
-                <button onClick={() => setIsFormOpen(false)}>Submit</button>
-              </div>
-            </div>
-          </div>
+            }
+            sectionName="Education"
+            formSection={
+              <>
+                <TextInput labelName="School" />
+                <TextInput labelName="Degree" />
+                <TextInput labelName="Field of study" />
+                <TextInput labelName="From" />
+                <TextInput labelName="To" />
+              </>
+            }
+          />
         </SectionContainer>
 
         <SectionContainer
