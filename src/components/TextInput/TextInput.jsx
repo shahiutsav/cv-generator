@@ -1,10 +1,10 @@
 import styles from "./TextInput.module.css";
 import PropTypes from "prop-types";
 
-const TextInput = ({ labelName, value, onChange }) => {
+const TextInput = ({ labelName, value, onChange, style }) => {
   return (
     <>
-      <div className={styles.textInput}>
+      <div className={styles.textInput} style={style}>
         <label htmlFor={formatIDForLabel(labelName)}>{labelName}</label>
         <input
           type="text"
@@ -21,6 +21,7 @@ TextInput.propTypes = {
   labelName: PropTypes.string,
   value: PropTypes.string,
   onChange: PropTypes.func,
+  style: PropTypes.object,
 };
 
 function formatIDForLabel(id) {

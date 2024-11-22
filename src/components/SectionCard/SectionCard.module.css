@@ -1,0 +1,43 @@
+.card {
+  /* background-color: rgb(35, 52, 88); */
+  width: 100%;
+  padding: 0 18px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* .card:hover {
+  background-color: rgb(35, 52, 88);
+  transition: all 0.2s ease-in-out;
+} */
+
+.cardIcons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgb(209 213 219);
+}
+
+.button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: rgb(209 213 219);
+  transition: all 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
+  border-radius: 50%;
+  height: 32px;
+  width: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button:hover {
+  color: rgb(3 7 18) !important;
+  transition: all 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
+  background-color: rgb(243 244 246) !important;
+  filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04))
+    drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
+}

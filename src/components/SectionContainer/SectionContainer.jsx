@@ -54,7 +54,9 @@ const SectionContainer = ({
         className={`${styles.sectionContainer} ${styles.collapseWrapper}`}
         ref={collapseWrapper}
       >
-        <div className={styles.sectionContent}>{children}</div>
+        <div className={styles.sectionContent}>
+          {children}
+        </div>
       </div>
     </section>
   );

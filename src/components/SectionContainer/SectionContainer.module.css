@@ -12,10 +12,6 @@
   line-height: 0;
 }
 
-.sectionContainer {
-  padding: 0px 16px;
-}
-
 .sectionHeading {
   display: flex;
   align-items: center;
@@ -23,6 +19,7 @@
   position: relative;
   height: 48px;
   cursor: pointer;
+  padding: 0px 16px;
 }
 
 .sectionHeadingDivider {
@@ -30,13 +27,13 @@
   background-color: rgb(55 65 81);
 }
 
-.sectionContent {
+/* .sectionContent {
   padding-top: 8px;
   padding-bottom: 28px;
   display: flex;
   flex-direction: column;
   gap: 12px;
-}
+} */
 
 .collapseWrapper {
   max-height: 0;
