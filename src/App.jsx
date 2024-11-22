@@ -63,13 +63,21 @@ function App() {
   };
 
   return (
-    <div style={{ display: "flex", gap: "16px" }}>
-      <Button>Default</Button>
-      <Button variant="destructive">Destructive</Button>
-      <Button variant="outline">Outline</Button>
-      <Button variant="secondary">Secondary</Button>
-      <Button variant="ghost">Ghost</Button>
-      <Button variant="link">Link</Button>
+    <div>
+      <div style={{ display: "flex", gap: "16px" }}>
+        <Button>Default</Button>
+        <Button variant="destructive">Destructive</Button>
+        <Button variant="outline">Outline</Button>
+        <Button variant="secondary">Secondary</Button>
+        <Button variant="ghost">Ghost</Button>
+        <Button variant="link">Link</Button>
+      </div>
+      <div style={{ display: "flex", gap: "16px" }}>
+        <Button size="sm">Small</Button>
+        <Button size="default">Default</Button>
+        <Button size="lg">Large</Button>
+        <Button size="icon">Icon</Button>
+      </div>
     </div>
     // <div>
     //   {/* <div className="input-section">

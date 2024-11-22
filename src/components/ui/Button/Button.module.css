@@ -74,5 +74,22 @@
 
 .defaultSize {
   height: 2.5rem;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1rem; /* y x */
+}
+
+.smSize {
+  height: 2.25rem;
+  border-radius: 0.375rem;
+  padding: 0rem 0.75rem;
+}
+
+.lgSize {
+  height: 2.75rem;
+  border-radius: 0.375rem;
+  padding: 0rem 2rem;
+}
+
+.iconSize {
+  width: 2.5rem;
+  height: 2.5rem;
 }
