@@ -29,7 +29,6 @@ const buttonVariants = cva(styles.common, {
 
 const Button = forwardRef(
   ({ className, variant, size, children, ...props }, ref) => {
-    console.log(variant);
     return (
       <button
         className={cn(buttonVariants({ variant, size, className }))}

@@ -14,6 +14,8 @@ import {
   CardFooter,
 } from "@/components/ui/Card/Card";
 import { Button } from "@/components/ui/Button/Button";
+import ProfileEditor from "./components/ProfileEditor/ProfileEditor";
+import { CollapsibleCard } from "@/components/ui/CollapsibleCard/CollapsibleCard";
 
 function App() {
   const [openIndex, setOpenIndex] = useState(0);
@@ -73,89 +75,81 @@ function App() {
   return (
     <div className="body">
       <div className="input-section">
-        <Card>
-          <CardHeader>
-            <CardTitle>Profile</CardTitle>
-            <CardDescription>
-              Enter your personal details and contact information.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="cardContent">
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "16px",
-              }}
-            >
-              <div style={{ display: "flex", gap: "16px" }}>
-                <TextInput
-                  labelName="First name"
-                  value={cvData.profile.firstName}
-                  onChange={(e) =>
-                    setCvData({
-                      ...cvData,
-                      profile: { ...cvData.profile, firstName: e.target.value },
-                    })
-                  }
-                />
-                <TextInput
-                  labelName="Last name"
-                  value={cvData.profile.lastName}
-                  onChange={(e) =>
-                    setCvData({
-                      ...cvData,
-                      profile: { ...cvData.profile, lastName: e.target.value },
-                    })
-                  }
-                />
-              </div>
+        <CollapsibleCard
+          title="Profile"
+          isOpen={openIndex === 0}
+          onToggle={() => handleToggle(0)}
+          hasTransition={hasTransition}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "16px",
+              height: "100%",
+            }}
+          >
+            <div style={{ display: "flex", gap: "16px" }}>
               <TextInput
-                labelName="Email"
-                value={cvData.profile.email}
+                labelName="First name"
+                value={cvData.profile.firstName}
                 onChange={(e) =>
                   setCvData({
                     ...cvData,
-                    profile: { ...cvData.profile, email: e.target.value },
+                    profile: { ...cvData.profile, firstName: e.target.value },
                   })
                 }
               />
               <TextInput
-                labelName="Phone"
-                value={cvData.profile.phone}
+                labelName="Last name"
+                value={cvData.profile.lastName}
                 onChange={(e) =>
                   setCvData({
                     ...cvData,
-                    profile: { ...cvData.profile, phone: e.target.value },
-                  })
-                }
-              />
-              <TextInput
-                labelName="Address"
-                value={cvData.profile.address}
-                onChange={(e) =>
-                  setCvData({
-                    ...cvData,
-                    profile: { ...cvData.profile, address: e.target.value },
+                    profile: { ...cvData.profile, lastName: e.target.value },
                   })
                 }
               />
             </div>
-          </CardContent>
-          <CardFooter>
+            <TextInput
+              labelName="Email"
+              value={cvData.profile.email}
+              onChange={(e) =>
+                setCvData({
+                  ...cvData,
+                  profile: { ...cvData.profile, email: e.target.value },
+                })
+              }
+            />
+            <TextInput
+              labelName="Phone"
+              value={cvData.profile.phone}
+              onChange={(e) =>
+                setCvData({
+                  ...cvData,
+                  profile: { ...cvData.profile, phone: e.target.value },
+                })
+              }
+            />
+            <TextInput
+              labelName="Address"
+              value={cvData.profile.address}
+              onChange={(e) =>
+                setCvData({
+                  ...cvData,
+                  profile: { ...cvData.profile, address: e.target.value },
+                })
+              }
+            />
+
             <Button style={{ width: "100%" }} variant="secondary">
               Save
             </Button>
-          </CardFooter>
-        </Card>
-        <SectionContainer
-          header={"Profile"}
-          isOpen={openIndex === 0}
-          onToggle={() => handleToggle(0)}
-          hasTransition={hasTransition}
-        ></SectionContainer>
-        <SectionContainer
-          header={"Education"}
+          </div>
+        </CollapsibleCard>
+
+        <CollapsibleCard
+          title="Education"
           isOpen={openIndex === 1}
           onToggle={() => handleToggle(1)}
           hasTransition={hasTransition}
@@ -182,19 +176,36 @@ function App() {
               </>
             }
           />
-        </SectionContainer>
+        </CollapsibleCard>
 
-        <SectionContainer
-          header={"Experience"}
+        <CollapsibleCard
+          title="Experience"
           isOpen={openIndex === 2}
           onToggle={() => handleToggle(2)}
           hasTransition={hasTransition}
         >
-          <TextInput labelName="Job title" />
-          <TextInput labelName="Company" />
-          <TextInput labelName="From" />
-          <TextInput labelName="To" />{" "}
-        </SectionContainer>
+          <FormCarousel
+            listSection={
+              <div>
+                {cvData.experience.map((exp, index) => (
+                  <div key={index}>
+                    <SectionCard title={exp.company} />
+                    {index !== cvData.experience.length - 1 && <Divider />}
+                  </div>
+                ))}
+              </div>
+            }
+            sectionName="Experience"
+            formSection={
+              <>
+                <TextInput labelName="Job title" />
+                <TextInput labelName="Company" />
+                <TextInput labelName="From" />
+                <TextInput labelName="To" />
+              </>
+            }
+          />
+        </CollapsibleCard>
       </div>
       <div className="cv-display">
         <h2>
