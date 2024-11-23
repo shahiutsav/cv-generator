@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import PropTypes from "prop-types";
 import { CollapsibleGroup } from "../ui/CollapsibleGroup/CollapsibleGroup";
 import PersonalInformationCard from "./PersonalInformationCard";
+import EducationSection from "./EducationSection";
 
 const ProfileEditor = forwardRef(function ProfileEditor(
   { className, data, setData, ...props },
@@ -17,7 +18,7 @@ const ProfileEditor = forwardRef(function ProfileEditor(
       {...props}
     >
       <PersonalInformationCard cvData={data} setCvData={setData} />
-      <PersonalInformationCard cvData={data} setCvData={setData} />
+      <EducationSection cvData={data} setCvData={setData} />
     </CollapsibleGroup>
   );
 });
@@ -29,50 +30,6 @@ ProfileEditor.propTypes = {
   data: PropTypes.object,
   setData: PropTypes.func,
 };
-
-// const EducationInformationCard = forwardRef(function EducationInformationCard(
-//   { className, cvData, ...props },
-//   ref
-// ) {
-//   return (
-//     <CollapsibleCard
-//       title="Education"
-//       ref={ref}
-//       className={cn(styles.educationInformationCard, className)}
-//       {...props}
-//     >
-//       <FormCarousel
-//         listSection={
-//           <div>
-//             {cvData.education.map((edu, index) => (
-//               <div key={index}>
-//                 <SectionCard title={edu.institution} />
-//                 {index !== cvData.education.length - 1 && <Divider />}
-//               </div>
-//             ))}
-//           </div>
-//         }
-//         sectionName="Education"
-//         formSection={
-//           <>
-//             <TextInput labelName="School" />
-//             <TextInput labelName="Degree" />
-//             <TextInput labelName="Field of study" />
-//             <TextInput labelName="From" />
-//             <TextInput labelName="To" />
-//           </>
-//         }
-//       />
-//     </CollapsibleCard>
-//   );
-// });
-
-// EducationInformationCard.displayName = "EducationInformationCard";
-
-// EducationInformationCard.propTypes = {
-//   className: PropTypes.string,
-//   cvData: PropTypes.object,
-// };
 
 // const WorkInformationCard = forwardRef(function WorkInformationCard(
 //   { className, cvData, ...props },

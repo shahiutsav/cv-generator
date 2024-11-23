@@ -14,16 +14,18 @@ function App() {
     },
     education: [
       {
-        institution: "ABC University",
+        school: "ABC University",
         degree: "Bachelor of Science",
-        startDate: "2010-09-01",
-        endDate: "2014-06-30",
+        fieldOfStudy: "Computer Science",
+        startDate: "2005-01-01",
+        endDate: "2008-06-30",
       },
       {
-        institution: "XYZ College",
-        degree: "Associate of Arts",
-        startDate: "2008-09-01",
-        endDate: "2010-06-30",
+        school: "XYZ College",
+        degree: "High School Diploma",
+        fieldOfStudy: "General Education",
+        startDate: "2000-01-01",
+        endDate: "2004-06-30",
       },
     ],
     experience: [
