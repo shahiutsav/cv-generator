@@ -15,6 +15,7 @@
 
 button,
 input,
+input::file-selector-button,
 select,
 textarea {
   font: inherit; /* Inherits font styles */

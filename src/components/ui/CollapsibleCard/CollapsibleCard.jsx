@@ -19,20 +19,18 @@ const CollapsibleCard = forwardRef(function CollapsibleCard(
 
   useEffect(() => {
     if (isOpen) {
-      const wrapper = collapseWrapperRef.current;
-      wrapper.style.paddingBottom = "1.5rem";
-      wrapper.style.maxHeight = wrapper.scrollHeight + "px";
+      collapseWrapperRef.current.style.maxHeight =
+        collapseWrapperRef.current.scrollHeight + "px";
       dropDownIconRef.current.style.transform = "rotate(180deg)";
     } else {
-      const wrapper = collapseWrapperRef.current;
-      wrapper.style.maxHeight = "0px";
+      collapseWrapperRef.current.style.maxHeight = "0px";
       dropDownIconRef.current.style.transform = "rotate(0deg)";
-      wrapper.style.paddingBottom = "0rem";
     }
 
     if (hasTransition) {
-      collapseWrapperRef.current.style.transition = "all 0.2s ease-in-out";
-      dropDownIconRef.current.style.transition = "all 0.1s ease-in-out";
+      collapseWrapperRef.current.style.transition =
+        "max-height 0.2s ease-in-out";
+      dropDownIconRef.current.style.transition = "transform 0.1s ease-in-out";
     } else {
       collapseWrapperRef.current.style.transition = "none";
       dropDownIconRef.current.style.transition = "none";
