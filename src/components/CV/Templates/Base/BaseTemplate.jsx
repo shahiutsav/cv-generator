@@ -7,6 +7,7 @@ import {
 import PropTypes from "prop-types";
 import styles from "./BaseTemplate.module.css";
 import { Home, Mail, Phone } from "lucide-react";
+import { formatDate } from "@/lib/utils";
 
 const BaseTemplate = forwardRef(({ data }, ref) => {
   return (
@@ -41,7 +42,7 @@ const BaseTemplate = forwardRef(({ data }, ref) => {
             {data.education.map((item) => (
               <div key={item.id} className={styles.educationItem}>
                 <p className={styles.date}>
-                  {item.startDate}-{item.endDate}
+                  {formatDate(item.startDate)} - {formatDate(item.endDate)}
                 </p>
                 <p className={styles.institution}>{item.institution}</p>
                 <p className={styles.heading1}>
@@ -58,7 +59,7 @@ const BaseTemplate = forwardRef(({ data }, ref) => {
             {data.work.map((item) => (
               <div key={item.id} className={styles.workItem}>
                 <p className={styles.date}>
-                  {item.startDate}-{item.endDate}
+                  {formatDate(item.startDate)} - {formatDate(item.endDate)}
                 </p>
                 <p className={styles.company}>{item.company}</p>
                 <p className={styles.position}>{item.position}</p>

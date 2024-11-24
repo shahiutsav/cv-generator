@@ -20,8 +20,8 @@ function App() {
         institution: "ABC University",
         degree: "Bachelor of Science",
         fieldOfStudy: "Computer Science",
-        startDate: "2005-01-01",
-        endDate: "2008-06-30",
+        startDate: "2005-01",
+        endDate: "2008-06",
       },
       {
         id: 2,
@@ -29,8 +29,8 @@ function App() {
           "XYZ College",
         degree: "High School Diploma",
         fieldOfStudy: "General Education",
-        startDate: "2000-01-01",
-        endDate: "2004-06-30",
+        startDate: "2000-01",
+        endDate: "2004-06",
       },
     ],
     work: [
@@ -38,8 +38,8 @@ function App() {
         id: 1,
         company: "XYZ Company",
         position: "Software Engineer",
-        startDate: "2015-07-01",
-        endDate: "2020-12-31",
+        startDate: "2015-07",
+        endDate: "2020-12",
       },
     ],
   };
