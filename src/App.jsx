@@ -30,6 +30,38 @@ function App() {
         startDate: "2000-01-01",
         endDate: "2004-06-30",
       },
+      {
+        id: 3,
+        institution: "XYZ College",
+        degree: "High School Diploma",
+        fieldOfStudy: "General Education",
+        startDate: "2000-01-01",
+        endDate: "2004-06-30",
+      },
+      {
+        id: 4,
+        institution: "XYZ College",
+        degree: "High School Diploma",
+        fieldOfStudy: "General Education",
+        startDate: "2000-01-01",
+        endDate: "2004-06-30",
+      },
+      {
+        id: 5,
+        institution: "XYZ College",
+        degree: "High School Diploma",
+        fieldOfStudy: "General Education",
+        startDate: "2000-01-01",
+        endDate: "2004-06-30",
+      },
+      {
+        id: 6,
+        institution: "XYZ College",
+        degree: "High School Diploma",
+        fieldOfStudy: "General Education",
+        startDate: "2000-01-01",
+        endDate: "2004-06-30",
+      },
     ],
     experience: [
       {

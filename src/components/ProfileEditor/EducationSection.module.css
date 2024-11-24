@@ -1,3 +1,7 @@
+.collapsibleCard {
+  max-height: 422px;
+}
+
 .header {
   display: flex;
   align-items: center;
@@ -29,8 +33,47 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  max-height: 290px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-bottom: 18px;
+  box-sizing: border-box;
+  padding-right: 0px;
 }
 
+.scrollable {
+  padding-right: 6px;
+}
+
+/* width */
+.list::-webkit-scrollbar {
+  touch-action: none;
+  display: flex;
+  user-select: none;
+  height: 100%;
+  width: 6px;
+  border-left-width: 1px;
+  border-left-color: transparent;
+  padding: 1px;
+  box-sizing: border-box;
+}
+
+/* Track
+.list::-webkit-scrollbar-track {
+  background: transparent;
+} */
+
+/* Handle */
+.list::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: 0.375rem;
+  background-clip: padding-box;
+}
+
+/* Handle on list hover */
+.list:hover::-webkit-scrollbar-thumb {
+  background-color: hsl(var(--secondary));
+}
 .card {
   position: relative;
 }

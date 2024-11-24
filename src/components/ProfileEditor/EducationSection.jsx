@@ -1,4 +1,4 @@
-import { useState, forwardRef } from "react";
+import { useState, forwardRef, useRef, useEffect } from "react";
 import { ArrowLeft, Pencil, Trash } from "lucide-react";
 import { Button } from "@/components/ui/Button/Button";
 import { CollapsibleCard } from "@/components/ui/CollapsibleCard/CollapsibleCard";
@@ -7,6 +7,7 @@ import { SlidingViews } from "@/components/ui/SlidingViews/SlidingViews";
 import PropTypes from "prop-types";
 import styles from "./EducationSection.module.css";
 import { Card, CardHeader } from "../ui/Card/Card";
+import { cn } from "@/lib/utils";
 
 const EducationSection = forwardRef(
   ({ className, cvData, setCvData, ...props }, ref) => {
@@ -18,6 +19,20 @@ const EducationSection = forwardRef(
       startDate: "",
       endDate: "",
     });
+
+    const scrollContainerRef = useRef(null);
+
+    useEffect(() => {
+      const hasScrollbar =
+        scrollContainerRef.current.scrollHeight >
+        scrollContainerRef.current.clientHeight;
+
+        if (hasScrollbar) {
+          scrollContainerRef.current.classList.add(styles.scrollable);
+        } else {
+          scrollContainerRef.current.classList.remove(styles.scrollable);
+        }
+    }, [activeView]);
 
     const handleSubmit = (e) => {
       e.preventDefault();
@@ -44,9 +59,15 @@ const EducationSection = forwardRef(
         return;
       }
 
+      // Add new education
+      // Generate an incremented id for the new education
+      const newId =
+        cvData.education.length > 0
+          ? Math.max(...cvData.education.map((edu) => edu.id)) + 1
+          : 1;
       setCvData((prev) => ({
         ...prev,
-        education: [...(prev.education || []), formData],
+        education: [...prev.education, { ...formData, id: newId }],
       }));
       setFormData({
         institution: "",
@@ -62,7 +83,7 @@ const EducationSection = forwardRef(
       <CollapsibleCard
         title="Education"
         ref={ref}
-        className={className}
+        className={cn(className, styles.collapsibleCard)}
         {...props}
       >
         <SlidingViews activeView={activeView}>
@@ -77,7 +98,7 @@ const EducationSection = forwardRef(
               </Button>
             </div>
 
-            <div className={styles.list}>
+            <div className={styles.list} ref={scrollContainerRef}>
               {(cvData.education || []).map((edu, index) => (
                 <Card key={index} className={styles.card}>
                   <CardHeader className={styles.cardHeader}>
