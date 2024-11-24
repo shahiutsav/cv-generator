@@ -41,6 +41,12 @@ const PersonalInformationCard = forwardRef(function PersonalInformationCard(
           />
         </div>
         <Input
+          placeholder="Job Title"
+          name="jobTitle"
+          value={cvData.profile.jobTitle}
+          onChange={handleChange}
+        />
+        <Input
           placeholder="Email"
           name="email"
           value={cvData.profile.email}
