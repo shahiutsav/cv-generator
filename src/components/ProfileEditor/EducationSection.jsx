@@ -1,11 +1,12 @@
 import { useState, forwardRef } from "react";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Pencil, Trash } from "lucide-react";
 import { Button } from "@/components/ui/Button/Button";
 import { CollapsibleCard } from "@/components/ui/CollapsibleCard/CollapsibleCard";
 import { Input } from "@/components/ui/Input/Input";
 import { SlidingViews } from "@/components/ui/SlidingViews/SlidingViews";
 import PropTypes from "prop-types";
 import styles from "./EducationSection.module.css";
+import { Card, CardHeader } from "../ui/Card/Card";
 
 const EducationSection = forwardRef(
   ({ className, cvData, setCvData, ...props }, ref) => {
@@ -20,6 +21,29 @@ const EducationSection = forwardRef(
 
     const handleSubmit = (e) => {
       e.preventDefault();
+
+      // Check if the form data is for an existing education using id
+      const existingEducation = cvData.education.find(
+        (edu) => edu.id === formData.id
+      );
+      if (existingEducation) {
+        setCvData((prev) => ({
+          ...prev,
+          education: prev.education.map((edu) =>
+            edu.id === formData.id ? formData : edu
+          ),
+        }));
+        setFormData({
+          institution: "",
+          degree: "",
+          fieldOfStudy: "",
+          startDate: "",
+          endDate: "",
+        });
+        setActiveView(0);
+        return;
+      }
+
       setCvData((prev) => ({
         ...prev,
         education: [...(prev.education || []), formData],
@@ -45,7 +69,7 @@ const EducationSection = forwardRef(
           <SlidingViews.View>
             <div className={styles.header}>
               <Button
-                variant="outline"
+                variant="secondary"
                 onClick={() => setActiveView(1)}
                 className={styles.addButton}
               >
@@ -55,15 +79,39 @@ const EducationSection = forwardRef(
 
             <div className={styles.list}>
               {(cvData.education || []).map((edu, index) => (
-                <div key={index} className={styles.card}>
-                  <h4 className={styles.institutionName}>{edu.institution}</h4>
-                  <p className={styles.degree}>
-                    {edu.degree} in {edu.fieldOfStudy}
-                  </p>
-                  <p className={styles.date}>
-                    {edu.startDate} - {edu.endDate}
-                  </p>
-                </div>
+                <Card key={index} className={styles.card}>
+                  <CardHeader className={styles.cardHeader}>
+                    <span className={styles.institutionName}>
+                      {edu.institution}
+                    </span>
+                    <div className={styles.actions}>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => {
+                          setActiveView(1);
+                          setFormData(edu);
+                        }}
+                      >
+                        <Pencil className={styles.icon} />
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() =>
+                          setCvData((prev) => ({
+                            ...prev,
+                            education: prev.education.filter(
+                              (_, i) => i !== index
+                            ),
+                          }))
+                        }
+                      >
+                        <Trash className={styles.icon} />
+                      </Button>
+                    </div>
+                  </CardHeader>
+                </Card>
               ))}
               {(!cvData.education || cvData.education.length === 0) && (
                 <p className={styles.emptyMessage}>
@@ -82,12 +130,12 @@ const EducationSection = forwardRef(
               >
                 <ArrowLeft className={styles.icon} />
               </Button>
-              <Button type="submit" className={styles.submitButton}>
-                Save
-              </Button>
             </div>
 
             <form onSubmit={handleSubmit} className={styles.form}>
+              <Button type="submit" className={styles.submitButton}>
+                Save
+              </Button>
               <div className={styles.formFields}>
                 <Input
                   placeholder="Institution"
@@ -121,7 +169,6 @@ const EducationSection = forwardRef(
                     placeholder="Start Date"
                     label="Start Date"
                     type="month"
-                    
                     value={formData.startDate}
                     onChange={(e) =>
                       setFormData({ ...formData, startDate: e.target.value })

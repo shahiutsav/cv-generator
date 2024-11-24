@@ -14,14 +14,17 @@ function App() {
     },
     education: [
       {
-        school: "ABC University",
+        id: 1,
+        institution: "ABC University",
         degree: "Bachelor of Science",
         fieldOfStudy: "Computer Science",
         startDate: "2005-01-01",
         endDate: "2008-06-30",
       },
       {
-        school: "XYZ College",
+        id: 2,
+        institution:
+          "XYZ College random names of institution to see if the text truncates",
         degree: "High School Diploma",
         fieldOfStudy: "General Education",
         startDate: "2000-01-01",
@@ -60,6 +63,15 @@ function App() {
         <p>{cvData.profile.email}</p>
         <p>{cvData.profile.phone}</p>
         <p>{cvData.profile.address}</p>
+        {cvData.education.map((edu, index) => (
+          <div key={index}>
+            <h3>{edu.institution}</h3>
+            <p>{edu.degree}</p>
+            <p>{edu.fieldOfStudy}</p>
+            <p>{edu.startDate}</p>
+            <p>{edu.endDate}</p>
+          </div>
+        ))}
       </div>
     </div>
   );
