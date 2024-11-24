@@ -78,6 +78,10 @@
   margin-bottom: 0.875rem;
 }
 
+.institution {
+  font-weight: 600;
+}
+
 .date {
   color: hsl(var(--grey));
 }
@@ -87,4 +91,36 @@
   margin-bottom: 2.375rem;
   width: 1px;
   background-color: #bdbdbd;
+}
+
+.workItem {
+  margin-bottom: 1.25rem;
+}
+
+.company,
+.positionAndDate {
+  font-weight: 600;
+  letter-spacing: 0em;
+}
+
+.positionAndDate {
+  margin-bottom: 1rem;
+}
+
+.responsibilities {
+  list-style-type: disc;
+  box-sizing: border-box;
+  margin-left: 1.5em;
+  line-height: 1.25rem;
+}
+
+.item {
+  margin-bottom: 0.5rem;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: #bdbdbd;
+  margin-bottom: 1.25rem;
 }

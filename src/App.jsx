@@ -25,8 +25,7 @@ function App() {
       },
       {
         id: 2,
-        institution:
-          "XYZ College",
+        institution: "XYZ College",
         degree: "High School Diploma",
         fieldOfStudy: "General Education",
         startDate: "2000-01",
@@ -36,10 +35,21 @@ function App() {
     work: [
       {
         id: 1,
+        company: "ACME Studios",
+        position: "Lead designer",
+        startDate: "2010-07",
+        endDate: "2012-12",
+        responsibilities:
+          "-Developed and maintained web applications\n-Provided technical support to clients\n-Implemented new features and enhancements",
+      },
+      {
+        id: 2,
         company: "XYZ Company",
         position: "Software Engineer",
         startDate: "2015-07",
         endDate: "2020-12",
+        responsibilities:
+          "-Developed and maintained web applications\n-Provided technical support to clients\n-Implemented new features and enhancements",
       },
     ],
   };

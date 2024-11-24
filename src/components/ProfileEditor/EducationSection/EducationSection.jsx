@@ -91,7 +91,16 @@ const EducationSection = forwardRef(
             <div className={styles.header}>
               <Button
                 variant="secondary"
-                onClick={() => setActiveView(1)}
+                onClick={() => {
+                  setActiveView(1);
+                  setFormData({
+                    institution: "",
+                    degree: "",
+                    fieldOfStudy: "",
+                    startDate: "",
+                    endDate: "",
+                  });
+                }}
                 className={styles.addButton}
               >
                 Add Education

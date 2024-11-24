@@ -1,4 +1,4 @@
-import { forwardRef } from "react";
+import { forwardRef, Fragment } from "react";
 import {
   CVContainer,
   CVLayout,
@@ -57,14 +57,30 @@ const BaseTemplate = forwardRef(({ data }, ref) => {
           <CVSection>
             <h2>Experience</h2>
             {data.work.map((item) => (
-              <div key={item.id} className={styles.workItem}>
-                <p className={styles.date}>
-                  {formatDate(item.startDate)} - {formatDate(item.endDate)}
-                </p>
-                <p className={styles.company}>{item.company}</p>
-                <p className={styles.position}>{item.position}</p>
-                <p className={styles.description}>{item.description}</p>
-              </div>
+              <Fragment key={item.id}>
+                <div className={styles.workItem}>
+                  <p className={styles.company}>{item.company}</p>
+                  <p className={styles.positionAndDate}>
+                    {item.position} | {formatDate(item.startDate)} -{" "}
+                    {formatDate(item.endDate)}
+                  </p>
+
+                  <ul className={styles.responsibilities}>
+                    {item.responsibilities
+                      .replace(/-/g, "")
+                      .trim()
+                      .split("\n")
+                      .map((item) => (
+                        <li key={item} className={styles.item}>
+                          {item}
+                        </li>
+                      ))}
+                  </ul>
+                </div>
+                {data.work[data.work.length - 1] !== item && (
+                  <div className={styles.divider}></div>
+                )}
+              </Fragment>
             ))}
           </CVSection>
         </CVLayout.Column>

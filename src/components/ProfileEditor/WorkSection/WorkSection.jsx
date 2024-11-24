@@ -8,6 +8,7 @@ import PropTypes from "prop-types";
 import styles from "./WorkSection.module.css";
 import { Card, CardHeader } from "../../ui/Card/Card";
 import { cn } from "@/lib/utils";
+import { Textarea } from "@/components/ui/TextArea/TextArea";
 
 const WorkSection = forwardRef(
   ({ className, cvData, setCvData, ...props }, ref) => {
@@ -17,6 +18,7 @@ const WorkSection = forwardRef(
       position: "",
       startDate: "",
       endDate: "",
+      responsibilities: "",
     };
     const [formData, setFormData] = useState(initialFormData);
 
@@ -77,7 +79,10 @@ const WorkSection = forwardRef(
             <div className={styles.header}>
               <Button
                 variant="secondary"
-                onClick={() => setActiveView(1)}
+                onClick={() => {
+                  setActiveView(1);
+                  setFormData(initialFormData);
+                }}
                 className={styles.addButton}
               >
                 Add Work Experience
@@ -88,9 +93,7 @@ const WorkSection = forwardRef(
               {(cvData.work || []).map((work, index) => (
                 <Card key={index} className={styles.card}>
                   <CardHeader className={styles.cardHeader}>
-                    <span className={styles.institutionName}>
-                      {work.company}
-                    </span>
+                    <span className={styles.companyName}>{work.company}</span>
                     <div className={styles.actions}>
                       <Button
                         variant="ghost"
@@ -160,7 +163,6 @@ const WorkSection = forwardRef(
                   }
                   required
                 />
-
                 <div className={styles.dateFields}>
                   <Input
                     placeholder="Start Date"
@@ -182,6 +184,20 @@ const WorkSection = forwardRef(
                     }
                   />
                 </div>
+                <Textarea
+                  placeholder="Responsibilities
+- Describe your responsibilities at the company
+- You can use bullet points to list your responsibilities"
+                  label="Responsibilities"
+                  value={formData.responsibilities}
+                  className={styles.textarea}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      responsibilities: e.target.value,
+                    })
+                  }
+                />
               </div>
             </form>
           </SlidingViews.View>
