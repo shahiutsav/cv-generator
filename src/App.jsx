@@ -63,8 +63,61 @@ function App() {
         endDate: "2004-06-30",
       },
     ],
-    experience: [
+    work: [
       {
+        id: 1,
+        company: "XYZ Company",
+        position: "Software Engineer",
+        startDate: "2015-07-01",
+        endDate: "2020-12-31",
+      },
+      {
+        id: 1,
+        company: "XYZ Company",
+        position: "Software Engineer",
+        startDate: "2015-07-01",
+        endDate: "2020-12-31",
+      },
+
+      {
+        id: 1,
+        company: "XYZ Company",
+        position: "Software Engineer",
+        startDate: "2015-07-01",
+        endDate: "2020-12-31",
+      },
+
+      {
+        id: 1,
+        company: "XYZ Company",
+        position: "Software Engineer",
+        startDate: "2015-07-01",
+        endDate: "2020-12-31",
+      },
+      {
+        id: 1,
+        company: "XYZ Company",
+        position: "Software Engineer",
+        startDate: "2015-07-01",
+        endDate: "2020-12-31",
+      },
+
+      {
+        id: 1,
+        company: "XYZ Company",
+        position: "Software Engineer",
+        startDate: "2015-07-01",
+        endDate: "2020-12-31",
+      },
+      {
+        id: 1,
+        company: "XYZ Company",
+        position: "Software Engineer",
+        startDate: "2015-07-01",
+        endDate: "2020-12-31",
+      },
+      {
+        id: 1,
         company: "XYZ Company",
         position: "Software Engineer",
         startDate: "2015-07-01",
@@ -73,6 +126,7 @@ function App() {
     ],
     projects: [
       {
+        id: 1,
         name: "Project A",
         description: "Description of Project A",
         startDate: "2021-01-01",
@@ -102,6 +156,22 @@ function App() {
             <p>{edu.fieldOfStudy}</p>
             <p>{edu.startDate}</p>
             <p>{edu.endDate}</p>
+          </div>
+        ))}
+        {cvData.work.map((work, index) => (
+          <div key={index}>
+            <h3>{work.company}</h3>
+            <p>{work.position}</p>
+            <p>{work.startDate}</p>
+            <p>{work.endDate}</p>
+          </div>
+        ))}
+        {cvData.projects.map((project, index) => (
+          <div key={index}>
+            <h3>{project.name}</h3>
+            <p>{project.description}</p>
+            <p>{project.startDate}</p>
+            <p>{project.endDate}</p>
           </div>
         ))}
       </div>

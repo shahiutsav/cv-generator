@@ -4,7 +4,8 @@ import { cn } from "@/lib/utils";
 import PropTypes from "prop-types";
 import { CollapsibleGroup } from "../ui/CollapsibleGroup/CollapsibleGroup";
 import PersonalInformationCard from "./PersonalInformationCard";
-import EducationSection from "./EducationSection";
+import EducationSection from "./EducationSection/EducationSection";
+import WorkSection from "./WorkSection/WorkSection";
 
 const ProfileEditor = forwardRef(function ProfileEditor(
   { className, data, setData, ...props },
@@ -19,6 +20,7 @@ const ProfileEditor = forwardRef(function ProfileEditor(
     >
       <PersonalInformationCard cvData={data} setCvData={setData} />
       <EducationSection cvData={data} setCvData={setData} />
+      <WorkSection cvData={data} setCvData={setData} />
     </CollapsibleGroup>
   );
 });

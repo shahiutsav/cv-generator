@@ -5,20 +5,20 @@ import { CollapsibleCard } from "@/components/ui/CollapsibleCard/CollapsibleCard
 import { Input } from "@/components/ui/Input/Input";
 import { SlidingViews } from "@/components/ui/SlidingViews/SlidingViews";
 import PropTypes from "prop-types";
-import styles from "./EducationSection.module.css";
-import { Card, CardHeader } from "../ui/Card/Card";
+import styles from "./WorkSection.module.css";
+import { Card, CardHeader } from "../../ui/Card/Card";
 import { cn } from "@/lib/utils";
 
-const EducationSection = forwardRef(
+const WorkSection = forwardRef(
   ({ className, cvData, setCvData, ...props }, ref) => {
     const [activeView, setActiveView] = useState(0);
-    const [formData, setFormData] = useState({
-      institution: "",
-      degree: "",
-      fieldOfStudy: "",
+    const initialFormData = {
+      company: "",
+      position: "",
       startDate: "",
       endDate: "",
-    });
+    };
+    const [formData, setFormData] = useState(initialFormData);
 
     const scrollContainerRef = useRef(null);
 
@@ -27,34 +27,26 @@ const EducationSection = forwardRef(
         scrollContainerRef.current.scrollHeight >
         scrollContainerRef.current.clientHeight;
 
-        if (hasScrollbar) {
-          scrollContainerRef.current.classList.add(styles.scrollable);
-        } else {
-          scrollContainerRef.current.classList.remove(styles.scrollable);
-        }
+      if (hasScrollbar) {
+        scrollContainerRef.current.classList.add(styles.scrollable);
+      } else {
+        scrollContainerRef.current.classList.remove(styles.scrollable);
+      }
     }, [activeView]);
 
     const handleSubmit = (e) => {
       e.preventDefault();
 
       // Check if the form data is for an existing education using id
-      const existingEducation = cvData.education.find(
-        (edu) => edu.id === formData.id
-      );
-      if (existingEducation) {
+      const existingWork = cvData.work.find((work) => work.id === formData.id);
+      if (existingWork) {
         setCvData((prev) => ({
           ...prev,
-          education: prev.education.map((edu) =>
-            edu.id === formData.id ? formData : edu
+          work: prev.work.map((work) =>
+            work.id === formData.id ? formData : work
           ),
         }));
-        setFormData({
-          institution: "",
-          degree: "",
-          fieldOfStudy: "",
-          startDate: "",
-          endDate: "",
-        });
+        setFormData(initialFormData);
         setActiveView(0);
         return;
       }
@@ -62,26 +54,20 @@ const EducationSection = forwardRef(
       // Add new education
       // Generate an incremented id for the new education
       const newId =
-        cvData.education.length > 0
-          ? Math.max(...cvData.education.map((edu) => edu.id)) + 1
+        cvData.work.length > 0
+          ? Math.max(...cvData.work.map((work) => work.id)) + 1
           : 1;
       setCvData((prev) => ({
         ...prev,
-        education: [...prev.education, { ...formData, id: newId }],
+        work: [...prev.work, { ...formData, id: newId }],
       }));
-      setFormData({
-        institution: "",
-        degree: "",
-        fieldOfStudy: "",
-        startDate: "",
-        endDate: "",
-      });
+      setFormData(initialFormData);
       setActiveView(0);
     };
 
     return (
       <CollapsibleCard
-        title="Education"
+        title="Experience"
         ref={ref}
         className={cn(className, styles.collapsibleCard)}
         {...props}
@@ -94,16 +80,16 @@ const EducationSection = forwardRef(
                 onClick={() => setActiveView(1)}
                 className={styles.addButton}
               >
-                Add Education
+                Add Work Experience
               </Button>
             </div>
 
             <div className={styles.list} ref={scrollContainerRef}>
-              {(cvData.education || []).map((edu, index) => (
+              {(cvData.work || []).map((work, index) => (
                 <Card key={index} className={styles.card}>
                   <CardHeader className={styles.cardHeader}>
                     <span className={styles.institutionName}>
-                      {edu.institution}
+                      {work.company}
                     </span>
                     <div className={styles.actions}>
                       <Button
@@ -111,7 +97,7 @@ const EducationSection = forwardRef(
                         size="icon"
                         onClick={() => {
                           setActiveView(1);
-                          setFormData(edu);
+                          setFormData(work);
                         }}
                       >
                         <Pencil className={styles.icon} />
@@ -122,9 +108,7 @@ const EducationSection = forwardRef(
                         onClick={() =>
                           setCvData((prev) => ({
                             ...prev,
-                            education: prev.education.filter(
-                              (_, i) => i !== index
-                            ),
+                            work: prev.work.filter((_, i) => i !== index),
                           }))
                         }
                       >
@@ -134,9 +118,9 @@ const EducationSection = forwardRef(
                   </CardHeader>
                 </Card>
               ))}
-              {(!cvData.education || cvData.education.length === 0) && (
+              {(!cvData.work || cvData.work.length === 0) && (
                 <p className={styles.emptyMessage}>
-                  No education history added yet
+                  No work experience added yet
                 </p>
               )}
             </div>
@@ -159,32 +143,24 @@ const EducationSection = forwardRef(
               </Button>
               <div className={styles.formFields}>
                 <Input
-                  placeholder="Institution"
-                  label="Institution"
-                  value={formData.institution}
+                  placeholder="Company"
+                  label="Company"
+                  value={formData.company}
                   onChange={(e) =>
-                    setFormData({ ...formData, institution: e.target.value })
+                    setFormData({ ...formData, company: e.target.value })
                   }
                   required
                 />
                 <Input
-                  placeholder="Degree"
-                  label="Degree"
-                  value={formData.degree}
+                  placeholder="Position"
+                  label="Position"
+                  value={formData.position}
                   onChange={(e) =>
-                    setFormData({ ...formData, degree: e.target.value })
+                    setFormData({ ...formData, position: e.target.value })
                   }
                   required
                 />
-                <Input
-                  placeholder="Field of Study"
-                  label="Field of Study"
-                  value={formData.fieldOfStudy}
-                  onChange={(e) =>
-                    setFormData({ ...formData, fieldOfStudy: e.target.value })
-                  }
-                  required
-                />
+
                 <div className={styles.dateFields}>
                   <Input
                     placeholder="Start Date"
@@ -215,12 +191,12 @@ const EducationSection = forwardRef(
   }
 );
 
-EducationSection.displayName = "EducationSection";
+WorkSection.displayName = "WorkSection";
 
-EducationSection.propTypes = {
+WorkSection.propTypes = {
   className: PropTypes.string,
   cvData: PropTypes.object,
   setCvData: PropTypes.func,
 };
 
-export default EducationSection;
+export default WorkSection;
