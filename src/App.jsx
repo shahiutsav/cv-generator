@@ -3,6 +3,10 @@ import { useState } from "react";
 
 import ProfileEditor from "@/components/ProfileEditor/ProfileEditor";
 import { BaseTemplate } from "@/components/CV/Templates/Base/BaseTemplate";
+import { Button } from "./components/ui/Button/Button";
+import { Printer } from "lucide-react";
+
+import PropTypes from "prop-types";
 
 function App() {
   const dummyData = {
@@ -62,10 +66,90 @@ function App() {
         <ProfileEditor data={cvData} setData={setCvData} />
       </div>
       <div className="output-section">
-        <BaseTemplate data={cvData} />
+        <PrintableCV data={cvData} />
       </div>
     </div>
   );
 }
+
+const PrintableCV = ({ data }) => {
+  return (
+    <div className="cv-container">
+      <div className="print-hidden">
+        <Button
+          onClick={() => window.print()}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "8px",
+            marginBottom: "1rem",
+          }}
+        >
+          <Printer size={16} />
+          Print CV
+        </Button>
+      </div>
+      <div className="cv-content">
+        <BaseTemplate data={data} />
+      </div>
+      <style>{`
+        @media print {
+          @page {
+            size: A4;
+            margin: 0;
+          }
+          
+          body {
+            margin: 0;
+            padding: 0;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+          }
+
+          /* Hide everything except the CV content */
+          .body {
+            display: flex;
+            justify-content: center;
+            background: none;
+          }
+
+          .input-section {
+            display: none !important;
+          }
+
+          .print-hidden {
+            display: none !important;
+          }
+
+          .cv-container {
+            width: 21cm;
+            min-height: 29.7cm;
+            margin: 0;
+            box-shadow: none;
+            background: white;
+          }
+
+          .cv-content {
+            width: 100%;
+            height: 100%;
+          }
+
+          /* Reset any conflicting styles */
+          .output-section {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            max-width: none;
+            box-shadow: none;
+          }
+        }
+      `}</style>
+    </div>
+  );
+};
+
+PrintableCV.propTypes = {
+  data: PropTypes.object.isRequired,
+};
 
 export default App;
